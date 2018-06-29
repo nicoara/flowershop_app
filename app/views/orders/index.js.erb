@@ -1,0 +1,1 @@
+$("#orders").html("<%=raw escape_javascript( render(:partial => 'all_orders', :locals => { :list => @orders } ) )%>");

@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
 		respond_to do |format|
 			format.html
 			format.json { render json: @orders }
+			format.js
 		end
 	end
 
