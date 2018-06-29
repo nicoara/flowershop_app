@@ -1,8 +1,13 @@
 class OrdersController < ApplicationController
-	before_action :Add view all orders, edit state of order, only: [ :edit, :update, :show]
+	before_action :set_order, only: [ :edit, :update, :show]
 
 	def index
-		@orders = Order.all
+		if sort_order == 'all'
+			@orders = Order.all		
+		else
+			@orders = Order.where(is_delivered: sort_order == 'true')
+			puts @orders
+		end
 	end
 
 	def show
@@ -43,5 +48,8 @@ class OrdersController < ApplicationController
 	  end
 	  def order_params
       params.require(:order).permit(:is_delivered, :nr_roses, :client_name, :delivery_date, :sort)
+    end
+    def sort_order
+    	%w(true false).include?(params[:sort]) ? params[:sort] : 'all'
     end
 end
