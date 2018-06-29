@@ -1,0 +1,16 @@
+<%= form_with(model: order, local: true) do |form| %>
+
+	<div class="field">
+		<%= form.label :status %>
+
+		<%= form.select :is_delivered do %>
+			<% [['delivered', true], ['pending', false]].each do |c| %>
+			<%= content_tag(:option, c.first, value: c.last, selected: c.last == @order.is_delivered) %>
+		<% end %>
+	</div>
+<% end %>
+
+
+
+<%= form.submit "Submit", class: "btn btn-primary" %>
+<% end %>

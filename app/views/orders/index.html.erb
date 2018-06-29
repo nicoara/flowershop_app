@@ -1,0 +1,12 @@
+<h1>All orders</h1>
+<ul>
+
+</br>
+
+
+  <% @orders.each do |order| %>
+
+  	<%= render order %>
+  	<%= link_to 'Edit', edit_order_path(order) %>
+  <% end %>
+</ul>
