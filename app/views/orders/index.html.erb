@@ -1,0 +1,17 @@
+
+
+<ul>
+<h1>All orders</h1>
+</br>
+<p>Filter by:</p>
+<%= link_to "delivered", orders_path(:sort => true) %>
+</br>
+<%= link_to "pending", orders_path(:sort => false) %>
+</br>
+<%= link_to "all", orders_path %>
+</br>
+</br>
+	<div id='orders'>
+		<%= render partial: 'all_orders', locals: { list: @orders } %>
+	</div>
+</ul>

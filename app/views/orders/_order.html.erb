@@ -1,0 +1,10 @@
+<li id='<%=order.id %>' >
+  status: <% if order.is_delivered %>
+	delivered
+  <% else %>
+    pending
+  <% end %>
+  , roses: <%= order.nr_roses %>
+  , client: <%= order.client_name %>
+  , delivery: <%= order.delivery_date%>
+</li>

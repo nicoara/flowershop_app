@@ -13,3 +13,14 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+//= require jquery
+
+$(function() {
+	setTimeout(updateOrders, 15000);
+});
+
+function updateOrders () {
+	$.getScript("/orders.js")
+	setTimeout(updateOrders, 15000);
+}
