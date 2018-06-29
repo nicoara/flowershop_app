@@ -8,9 +8,18 @@ class OrdersController < ApplicationController
 			@orders = Order.where(is_delivered: sort_order == 'true')
 			puts @orders
 		end
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @orders }
+		end
 	end
 
 	def show
+		respond_to do |format|
+			format.html
+			format.json { render json: @order }
+		end
 	end
 
 	def new
@@ -19,10 +28,14 @@ class OrdersController < ApplicationController
 
 	def create
     @order = Order.new(order_params)
-    if @order.save
-      redirect_to root_url
-    else
-      render 'new'
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.json { render :show, status: :created, location: @order }
+      else
+        format.html { render :new }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -30,7 +43,6 @@ class OrdersController < ApplicationController
   end
 
 	def update
-		#debugger
 		respond_to do |format|
     if @order.update(order_params)
       format.html { redirect_to @order, notice: 'Order was successfully updated.' }
