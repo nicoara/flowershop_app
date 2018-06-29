@@ -31,4 +31,21 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_select "li[id='#{@order_pending_1.id.to_s}']"
     assert_select "li[id='#{@order_pending_2.id.to_s}']"
   end
+
+  test "should create order" do
+    assert_difference('Order.count') do
+      post orders_url, params: { order: { is_delivered: true } }
+    end
+
+    assert_redirected_to order_url(Order.last)
+  end
+
+  test "should update an order" do
+    patch order_url(@order_delivered_1), params: { order: 
+      { is_delivered: false,
+        client_name: @order_delivered_1.client_name,
+        nr_roses: @order_delivered_1.nr_roses,
+        delivery_date: @order_delivered_1.delivery_date } }
+    assert_redirected_to order_url(@order_delivered_1)
+  end
 end
